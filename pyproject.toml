@@ -1,0 +1,31 @@
+[project]
+name = "movie_tracker"
+version = "1.0.0"
+authors = [
+    { name="Steven Crouse" },
+]
+description = "A Flask app that lets you keep track of the movies that you watch over the years."
+readme = "README.md"
+requires-python = ">=3.13"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+dependencies = [
+    "flask",
+    "pytest",
+    "coverage"
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["movie_tracker"]
