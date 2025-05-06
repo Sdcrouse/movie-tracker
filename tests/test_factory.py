@@ -6,4 +6,6 @@ def test_config():
 
 def test_index(client):
     response = client.get('/')
-    assert response.data == b'<h1>Welcome to the Movie Tracker!</h1>'
+    assert response.status_code == 200
+    assert b'href="/"' in response.data
+    assert b'Welcome to the Movie Tracker!' in response.data
