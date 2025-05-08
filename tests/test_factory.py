@@ -9,3 +9,6 @@ def test_index(client):
     assert response.status_code == 200
     assert b'href="/"' in response.data
     assert b'Welcome to the Movie Tracker!' in response.data
+
+    # TODO: This should only be true if the user is not logged in:
+    assert b'href="/auth/register"' in response.data
