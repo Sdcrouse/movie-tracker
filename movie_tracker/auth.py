@@ -7,17 +7,17 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
         error = None
 
-        if not username:
-            error = 'Username is required.'
+        if not email:
+            error = 'Email is required.'
         elif not password:
             error = 'Password is required.'
 
-        # TODO: Ensure that usernames and passwords are valid
-        # TODO: Ensure that the username doesn't already exist
+        # TODO: Ensure that emails and passwords are valid
+        # TODO: Ensure that the email doesn't already exist
 
         if error is None:
             # TODO: Change this to redirect to the login page
