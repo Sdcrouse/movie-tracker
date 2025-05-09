@@ -13,7 +13,7 @@ def test_register(client):
     (
         ('', 'paswrd', b'Email is required.'),
         ('userA@gmail.com', '', b'Password is required.'),
-        # TODO: Add test cases for invalid emails and passwords
+        # TODO: Add test cases for invalid passwords
         # TODO: Add a test case for a user who is already registered
     )
 )
@@ -23,3 +23,23 @@ def test_register_with_invalid_input(client, email, password, message):
         data={'email': email, 'password': password}
     )
     assert message in response.data
+
+@pytest.mark.parametrize('email', [
+    'abc123',
+    'abc@',
+    'abc@gmail.',
+    'abc@gmail.c',
+    '@yahoo.com',
+    'user@.com',
+    'abc@123@example.com',
+    'example.email@google.c0m'
+])
+def test_register_with_invalid_emails(client, email):
+    response = client.post(
+        '/auth/register',
+        data={'email': email, 'password': 'p@ssW0rd'}
+    )
+
+    assert b'Invalid email address.' in response.data
+
+# TODO: Add a test case for valid emails

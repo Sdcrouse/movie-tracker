@@ -1,3 +1,5 @@
+import re
+
 from flask import (
     Blueprint, request, flash, render_template
 )
@@ -16,7 +18,13 @@ def register():
         elif not password:
             error = 'Password is required.'
 
-        # TODO: Ensure that emails and passwords are valid
+        if error is None:
+            valid_email_pattern = re.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
+
+            if not valid_email_pattern.fullmatch(email):
+                error = 'Invalid email address.'
+
+        # TODO: Ensure that passwords are valid
         # TODO: Ensure that the email doesn't already exist
 
         if error is None:
